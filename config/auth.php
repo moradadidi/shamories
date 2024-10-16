@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Profile;
+
 return [
 
     /*
@@ -60,15 +62,16 @@ return [
     */
 
     'providers' => [
+    //     'users' => [
+    //     'driver' => 'eloquent',
+    //     'model' => App\Models\Profile::class,  // Change this to Profile model
+    // ],
+
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'table' => 'profiles',
+            'model' => Profile::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
