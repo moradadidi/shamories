@@ -1,7 +1,7 @@
 <x-master title="profil">
 
     <section class="bg-white ">
-        
+        <img class="" src="{{ asset('storage/profile/image.png') }}" alt="">
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900 ">Add New Profile</h2>
             <form method="POST" action="{{ route('profiles.store') }}" enctype="multipart/form-data">

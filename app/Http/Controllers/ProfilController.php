@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\profileMail;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller; // Ensure this is correctly imported
-
+use App\Models\Publication;
 
 class ProfilController extends Controller
 {
@@ -24,9 +25,12 @@ class ProfilController extends Controller
         return view('profile.index', compact('profiles'));
     }
 
-    public function show(Profile $profile)
+    public function show(Profile $profile , Publication $publication)
     {
-        
+        $profile->count = $profile->publications()->count();
+        $profile->comments = $profile->comments()->count();
+        $profile->follow = $profile->followers()->count();
+
         return view('profile.show', compact('profile'));
     }
     public function create()
@@ -100,4 +104,24 @@ class ProfilController extends Controller
         $profile->fill($form_data)->save();
         return redirect()->route('profiles.show', $profile->id)->with('success', 'Profile updated successfully');
     }
+    public function follow(Profile $profile)
+{
+    // Get the authenticated profile (assuming the authentication is set for Profile model)
+    $currentProfile = Auth::guard('web')->user(); // This should return the Profile model, not User
+
+    // Check if the current profile is already following the target profile
+    if ($currentProfile->isFollowing($profile)) {
+        // If already following, unfollow the profile
+        $currentProfile->following()->detach($profile->id);
+    } else {
+        // Otherwise, follow the profile
+        $currentProfile->following()->attach($profile->id);
+    }
+
+    // Redirect back to the previous page with success status
+    return redirect()->back()->with('status', 'Follow status updated successfully.');
+}
+
+    
+    
 }

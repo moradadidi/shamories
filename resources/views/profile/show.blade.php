@@ -1,66 +1,96 @@
 <x-master title="show_profile">
-    <div class="flex items-center justify-center min-h-screen bg-gray-100">
-        <div role="article" aria-labelledby="profile-title"
-            class="w-full sm:w-1/2 lg:w-1/4 mx-auto mt-10 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
 
-            <!-- Profile Image Section -->
-            <div class="h-[250px] sm:h-[300px] w-full relative">
-                <img class="w-full h-full object-cover object-center" src="{{ asset('storage/' . $profile->image) }}"
-                    alt="Profile image of {{ $profile->name }}">
-            </div>
-
-            <!-- User Information Section -->
-            <div class="w-full p-6 text-gray-600">
-
-                <!-- Name -->
-                <h1 id="profile-title" class="text-2xl font-semibold leading-tight text-gray-900">
-                    <a href="#" class="hover:text-blue-600 transition-colors duration-300">
-                        {{ $profile->name }}
-                    </a>
-                </h1>
-
-                <!-- Email -->
-                <p class="text-sm text-gray-400 font-medium mt-2">
-                    <a href="mailto:{{ $profile->email }}"
-                        class="hover:underline hover:text-blue-600 transition-colors duration-300">
-                        @ {{ $profile->email }}
-                    </a>
-                </p>
-
-                <!-- Bio Section -->
-                <div class="mt-4">
-                    <p class="text-base text-gray-700 font-light leading-relaxed">
-                        {{ $profile->bio }}
-                    </p>
+  
+    <main class="profile-page">
+      <section class="relative block h-500-px">
+        <div class="absolute top-0 w-full h-full bg-center bg-cover" style="
+                background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80');
+              ">
+          <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
+        </div>
+        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style="transform: translateZ(0px)">
+          <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+            <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+          </svg>
+        </div>
+      </section>
+      <section class="relative py-16 bg-blueGray-200">
+        <div class="container mx-auto px-4">
+          <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            <div class="px-6">
+              <div class="flex flex-wrap justify-center">
+                <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                  <div class="relative">
+                    <img alt="{{ $profile->name }}" src="{{ asset('storage/' . $profile->image) }}" class="shadow-xl w-40 rounded-full h-40 align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
+                  </div>
                 </div>
-
-                <!-- Profile Created At Section -->
-                <div class="mt-4">
-                    <p class="text-xs text-gray-400">
-                        Profile created on: {{ $profile->created_at->format('F j, Y') }}
-                    </p>
+                <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+                  <div class="py-6 px-3 mt-32 sm:mt-0">
+                    <button class="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" type="button">
+                      Connect
+                    </button>
+                  </div>
                 </div>
-
+                <div class="w-full lg:w-4/12 px-4 lg:order-1">
+                  <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                    <div class="mr-4 p-3 text-center">
+                      <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{{$profile->follow}}</span><span class="text-sm text-blueGray-400">Friends</span>
+                    </div>
+                    <div class="mr-4 p-3 text-center">
+                      <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{{ $profile->count }}</span><span class="text-sm text-blueGray-400">Photos</span>
+                    </div>
+                    <div class="lg:mr-4 p-3 text-center">
+                      <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{{$profile->comments}}</span><span class="text-sm text-blueGray-400">Comments</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-12">
+                <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 ">
+                  {{ $profile->name }}
+                </h3>
+                <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                  <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                  Los Angeles, California
+                </div>
+                <div class="mb-2 text-blueGray-600 mt-10">
+                  <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>Solution Manager - Creative Tim Officer
+                </div>
+                <div class="mb-2 text-blueGray-600">
+                  <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>University of Computer Science
+                </div>
+              </div>
+              <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+                <div class="flex flex-wrap justify-center">
+                  <div class="w-full lg:w-9/12 px-4">
+                    <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                      An artist of considerable range, Jenna the name taken by
+                      Melbourne-raised, Brooklyn-based Nick Murphy writes,
+                      performs and records all of his own music, giving it a
+                      warm, intimate feel with a solid groove structure. An
+                      artist of considerable range.
+                    </p>
+                    <a href="#pablo" class="font-normal text-pink-500">Show more</a>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    <!-- Publications Section -->
-    <div class="w-full  lg:w-5/6 mx-auto mt-10">
-        <!-- Publications Title -->
-        <div class="publication">
-            <h2 class="text-xl font-semibold p-6 text-gray-900 border-b border-gray-200">Publications by {{ $profile->name }}</h2>
+        <footer class="relative bg-blueGray-200 pt-8 pb-6 mt-8">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-center md:justify-between justify-center">
+          <div class="w-full md:w-6/12 px-4 mx-auto text-center">
+            <div class="text-sm text-blueGray-500 font-semibold py-1">
+              Made with <a href="https://www.creative-tim.com/product/notus-js" class="text-blueGray-500 hover:text-gray-800" target="_blank">Notus JS</a> by <a href="https://www.creative-tim.com" class="text-blueGray-500 hover:text-blueGray-800" target="_blank"> Creative Tim</a>.
+            </div>
+          </div>
         </div>
-
-        <!-- Publications Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-            @if ($profile->publications->isEmpty())
-                <p class="text-center text-gray-500">This profile has no publications yet.</p>
-            @else
-                @foreach ($profile->publications as $publication)
-                    <x-publication :publication="$publication" />
-                @endforeach
-            @endif
-        </div>
-    </div>
+      </div>
+    </footer>
+      </section>
+    </main>
 
 </x-master>
+    <!-- component -->
+  

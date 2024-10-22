@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- component -->
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+    <link rel="stylesheet"
+        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"  rel="stylesheet" />
 
@@ -17,24 +21,24 @@
     <div class="flex-grow bg-gray-100 mx-4">
         @include('partials.nav')
 
-        <main class="py-4">
+        <main class="mt-16">
 
 <div class="alert w-1/2">
             @if (session('success'))
                 <x-alert color="green">
                     {{ session('success') }}
 
-                </x-alert>
-            @endif
+                </x-alert> @endif
         </div>
 
             {{ $slot }}
         </main>
     </div>
 
-    <footer class=" text-white py-4">
-        @include('partials.footer')
+    <footer class="
+        text-white py-4">
+    @include('partials.footer')
     </footer>
-</body>
+    </body>
 
 </html>

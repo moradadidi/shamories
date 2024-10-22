@@ -22,4 +22,19 @@ class Publication extends Model
     {
         return $this->belongsTo(Profile::class);
     }
+    public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
+
+public function likes()
+{
+    return $this->hasMany(Like::class);
+}
+
+
+public function hasLiked(Publication $publication)
+{
+    return $this->likes()->where('publication_id', $publication->id)->exists();
+}
 }

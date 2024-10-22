@@ -19,10 +19,12 @@ class PublicationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Profile $profile)
     {
+        
+        $profiles = Profile::all()->except(Auth::id());
         $publications = Publication::latest()->get();
-        return view('publication.index', compact('publications'));
+        return view('publication.index', compact('publications', 'profiles'));
     }
 
     /**
@@ -67,16 +69,20 @@ class PublicationController extends Controller
      */
     public function show(Publication $publication)
     {
+        $publication->loadCount('likes'); // This will add a likes_count attribute to the publication
+
+        // dd($publication->likes_count);
+
         $profile = $publication->profile;
         $publications = DB::table('publications')->where('profile_id', Auth::id())->get();
 
-        return view('publication.show', compact('profile', 'publications'));
+        return view('publication.show', compact('profile', 'publications', 'publication'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Publication $publication , Request $request)
+    public function edit(Publication $publication, Request $request)
     {
         if ($request->user()->can('update', $publication)) {
             abort(404);
@@ -124,5 +130,42 @@ class PublicationController extends Controller
     {
         $publication->delete();
         return redirect()->route('publications.index')->with('success', 'Publication deleted successfully');
+    }
+    public function like(Publication $publication, Profile $profile)
+    {
+        $profilee = Auth::guard('web')->user(); // Get the authenticated Profile object
+        $profile = Profile::find($profilee->id);
+        // dd($profile);
+        // Check if the profile has already liked the publication
+        if ($profile->hasLiked($publication)) {
+            // If already liked, remove the like
+            $publication->likes()->where('profile_id', $profile->id)->delete(); // Remove based on profile ID
+        } else {
+            // Otherwise, like the publication
+            $publication->likes()->create([
+                'publication_id' => $publication->id,
+                'profile_id' => $profile->id,
+            ]);
+        }
+        
+       // Display the likes
+        
+        return back(); // Redirect back to the previous page
+    }
+    
+    
+
+    public function comment(Request $request, Publication $publication)
+    {
+        $request->validate([
+            'content' => 'required|string|max:255',
+        ]);
+
+        $publication->comments()->create([
+            'profile_id' => Auth::user()->id,
+            'content' => $request->content,
+        ]);
+
+        return back();
     }
 }

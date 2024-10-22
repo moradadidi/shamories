@@ -23,7 +23,14 @@ Route::get('/verify_email/{hash}', [ProfilController::class, 'verify_email']);
 // });
 
 Route::resource('profiles', ProfilController::class);
+Route::post('/profiles/{profile}/follow', [ProfilController::class, 'follow'])->name('profiles.follow');
+
 Route::resource('publications', PublicationController::class);
+// Like Route
+Route::post('/publications/{publication}/like', [PublicationController::class, 'like'])->name('publications.like');
+
+// Comment Route
+Route::post('/publications/{publication}/comment', [PublicationController::class, 'comment'])->name('publications.comment');
 
 
 Route::get('/settings', [informationController::class, "index"])->name('settings.index');

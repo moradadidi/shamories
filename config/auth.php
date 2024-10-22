@@ -16,9 +16,10 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
-    ],
+    'guard' => env('AUTH_GUARD', 'web'), // Default guard is web
+    'passwords' => env('AUTH_PASSWORD_BROKER', 'profiles'), // Change to 'profiles'
+],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +41,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'profiles',
         ],
     ],
 
@@ -67,7 +68,7 @@ return [
     //     'model' => App\Models\Profile::class,  // Change this to Profile model
     // ],
 
-        'users' => [
+        'profiles' => [
             'driver' => 'eloquent',
             'table' => 'profiles',
             'model' => Profile::class,
