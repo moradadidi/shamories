@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Save;
 use App\Notifications\LikedNotification;
+use App\Notifications\CommentedNotification;
 
 
 class PublicationController extends Controller
@@ -145,17 +146,45 @@ class PublicationController extends Controller
 
     public function comment(Request $request, Publication $publication)
     {
+        $profile = Auth::guard('web')->user();
         $request->validate([
             'content' => 'required|string|max:255',
         ]);
 
-        $publication->comments()->create([
+        $comment = $publication->comments()->create([
             'profile_id' => Auth::user()->id,
             'content' => $request->content,
         ]);
 
+        
+
+        $publication->profile->notify(new CommentedNotification($comment->profile, $comment->content));
+        // dd($comment->profile);
 
         return back();
+    }
+    
+    public function like(Publication $publication)
+    {
+        $profile = Auth::guard('web')->user(); // Get the authenticated Profile object
+
+        // Check if the profile has already liked the publication
+        if ($profile->hasLiked($publication)) {
+            // If already liked, remove the like
+            $publication->likes()->where('profile_id', $profile->id)->delete(); // Remove based on profile ID
+        } else {
+            // Otherwise, like the publication
+            $publication->likes()->create([
+                'publication_id' => $publication->id,
+                'profile_id' => $profile->id,
+            ]);
+
+            $publication->profile->notify(new LikedNotification($profile));
+        }
+        
+       // Display the likes
+        
+        return back(); // Redirect back to the previous page
     }
     public function toggleSave(Request $request, $publicationId)
     {
