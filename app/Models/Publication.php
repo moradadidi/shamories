@@ -37,4 +37,10 @@ public function hasLiked(Publication $publication)
 {
     return $this->likes()->where('publication_id', $publication->id)->exists();
 }
+
+public function saves()
+{
+    return $this->hasMany(Save::class);
+}
+
 }

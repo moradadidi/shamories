@@ -21,16 +21,14 @@
                                          alt="{{ $profile->name ?? 'No Name' }}">
                                     <div>
                                         <h4 class="text-sm font-bold text-gray-900">{{ $profile->name ?? 'Unknown' }}</h4>
-                                        <p class="text-xs text-gray-500">{{ $profile->followers_count ?? 0 }} followers</p>
+                                        <p class="text-xs text-gray-500">{{ $profile->followers->count() ?? 0 }} followers</p>
                                     </div>
                                 </div>
                                 
-
                                 <!-- Follow/Unfollow Button -->
                                 <form action="{{ route('profiles.follow', $profile->id) }}" method="POST">
                                     @csrf
-                                    
-                                    <h1>{{$profile->id}}</h1>
+
                                     <button type="submit" 
                                         
                                             class="text-xs px-3 py-1 font-semibold rounded-md transition-colors ease-in-out duration-150 

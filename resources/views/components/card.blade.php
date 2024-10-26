@@ -1,45 +1,52 @@
 <div role="card"
-    class="relative inline-block w-80 mx-10 my-10 text-sm text-gray-500 duration-300 bg-white border border-gray-200 rounded-lg shadow-lg p-6">
+    class="relative inline-block w-72 mx-10 my-10 text-sm text-gray-500 bg-white border border-gray-200 rounded-lg shadow-lg p-4">
 
-    <!-- Stretched Link Wrapper -->
-    <a href="{{ route('profiles.show', $profile->id) }}" class="absolute inset-0 z-10"></a>
-
-    <!-- Profile Image -->
-    <a href="#">
-        <img class="w-20 h-20 rounded-full mx-auto object-cover" 
-             src="{{ asset('storage/'.$profile->image) }}" 
-             alt="Profile image of {{ $profile->name }}">
-    </a>
-
-    <!-- User Name -->
-    <p class="mt-4 text-xl font-semibold leading-none text-gray-900 text-center">
-        <a href="#" class="hover:text-blue-600 transition-colors duration-300">{{ $profile->name }}</a>
-    </p>
-
-    <!-- Email -->
-    <p class="mb-3 text-sm font-normal text-center">
-        <a href="mailto:{{ $profile->email }}" class="hover:underline hover:text-blue-500">@ {{ $profile->email }}</a>
-    </p>
-
-    <!-- Show Profile Button -->
-    <div class="text-center mt-4">
-        <a href="{{ route('profiles.show', $profile->id) }}" 
-           class="z-20 font-medium text-blue-600 hover:underline">Show User</a>
-    </div>
-
-    <!-- Footer Section with Edit/Delete (only visible for the profile owner) -->
-    @if (Auth::id() == $profile->id)
-    <div class="mt-6 pt-4 border-t border-gray-200 relative z-20">
-        <form action="{{ route('profiles.destroy', $profile->id) }}" method="POST" class="text-center">
+    <!-- Profile Image and Follow Button -->
+    <div class="flex items-center justify-between mb-3">
+        <a href="{{ route('profiles.show', $profile->id) }}">
+            <img class="w-10 h-10 rounded-full" src="{{ asset('storage/' . $profile->image) }}"
+                alt="Profile image of {{ $profile->name }}">
+        </a>
+        <form action="{{ route('profiles.follow', $profile->id) }}" method="POST">
             @csrf
-            @method('DELETE')
-            <button type="submit" class="text-red-600 font-medium hover:underline mr-4">
-                Supprimer
+            <button type="submit"
+                class="text-white {{ Auth::check() && Auth::guard('web')->user()->isFollowing($profile) ? 'bg-red-700 hover:bg-red-800' : 'bg-blue-700 hover:bg-blue-800' }} focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5  {{ Auth::check() && Auth::guard('web')->user()->isFollowing($profile) ? ' hover:text-white' : 'text-blue-500 hover:text-white' }}">
+                {{ Auth::check() && Auth::guard('web')->user()->isFollowing($profile) ? 'Unfollow' : 'Follow' }}
             </button>
-            <a href="{{ route('profiles.edit', $profile->id) }}" class="font-medium text-blue-600 hover:underline">
-                Edit
-            </a>
         </form>
     </div>
-    @endif
+
+    <!-- Profile Name -->
+    <p class="text-base font-semibold leading-none text-gray-900">
+        <a href="{{ route('profiles.show', $profile->id) }}">{{ $profile->name }}</a>
+    </p>
+
+    <!-- Username (Email Link) -->
+    <p class="text-sm font-normal text-gray-600 mb-2">
+        <a href="mailto:{{ $profile->email }}" class="hover:underline">@ {{ $profile->email }}</a>
+    </p>
+
+    <!-- Occupation and University -->
+    <p class="mb-2 text-sm text-gray-700">
+        <strong>{{ $profile->occupation ?? 'Occupation not specified' }}</strong>
+    </p>
+    <p class="mb-4 text-sm text-gray-500">
+        Studied at {{ $profile->university ?? 'University not specified' }}
+    </p>
+
+    <!-- Follower/Following Stats -->
+    <ul class="flex text-sm text-gray-900">
+        <li class="mr-4">
+            <a href="#" class="hover:underline">
+                <span class="font-semibold">{{ $profile->following_count }}</span>
+                <span class="text-gray-600">Following</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="hover:underline">
+                <span class="font-semibold">{{ $profile->followers_count }}</span>
+                <span class="text-gray-600">Followers</span>
+            </a>
+        </li>
+    </ul>
 </div>

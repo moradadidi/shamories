@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Save;
+use App\Notifications\LikedNotification;
+
 
 class PublicationController extends Controller
 {
@@ -19,11 +22,16 @@ class PublicationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Profile $profile)
+    public function index(Profile $profile )
     {
         
         $profiles = Profile::all()->except(Auth::id());
         $publications = Publication::latest()->get();
+        $user  = Auth::guard('web')->user();
+
+        $user->follow = $profile->followers()->count();
+
+       
         return view('publication.index', compact('publications', 'profiles'));
     }
 
@@ -63,7 +71,7 @@ class PublicationController extends Controller
         // Redirect to the publications list with a success message
         return to_route('publications.index')->with('success', 'Publication created successfully');
     }
-
+    
     /**
      * Display the specified resource.
      */
@@ -131,27 +139,7 @@ class PublicationController extends Controller
         $publication->delete();
         return redirect()->route('publications.index')->with('success', 'Publication deleted successfully');
     }
-    public function like(Publication $publication, Profile $profile)
-    {
-        $profilee = Auth::guard('web')->user(); // Get the authenticated Profile object
-        $profile = Profile::find($profilee->id);
-        // dd($profile);
-        // Check if the profile has already liked the publication
-        if ($profile->hasLiked($publication)) {
-            // If already liked, remove the like
-            $publication->likes()->where('profile_id', $profile->id)->delete(); // Remove based on profile ID
-        } else {
-            // Otherwise, like the publication
-            $publication->likes()->create([
-                'publication_id' => $publication->id,
-                'profile_id' => $profile->id,
-            ]);
-        }
-        
-       // Display the likes
-        
-        return back(); // Redirect back to the previous page
-    }
+    
     
     
 
@@ -166,6 +154,37 @@ class PublicationController extends Controller
             'content' => $request->content,
         ]);
 
+
         return back();
     }
+    public function toggleSave(Request $request, $publicationId)
+    {
+        $user = Auth::guard('web')->user();
+        $save = Save::where('profile_id', $user->id)->where('publication_id', $publicationId)->first();
+    
+        if ($save) {
+            $save->delete();
+            $message = 'Post unsaved';
+            $status = 'unsaved';
+        } else {
+            Save::create([
+                'profile_id' => $user->id,
+                'publication_id' => $publicationId,
+            ]);
+            $message = 'Post saved';
+            $status = 'saved';
+        }
+    
+        return redirect()->back()->with([
+            'message' => $message,
+            'status' => $status,
+        ]);
+    }
+    
+    public function allSaves()
+    {
+        $saves = Save::with('publication', 'profile')->get();
+        return view('publication.saves', compact('saves'));
+    }
+
 }

@@ -1,11 +1,12 @@
 <x-master title="Se connecter">
     <section class="bg-gray-50">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-                <img class="w-24 h-24 mr-2" src="{{ asset('storage/profile/image.png') }}" alt="logo">
-            </a>
+            
             <div class="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <a href="#" class="flex items-center justify-center space-x-2  mb-6 text-2xl font-semibold text-gray-900">
+                        <img class="w-24 h-24 mr-2" src="{{ asset('storage/profile/okkke.jpeg') }}" alt="logo">
+                    </a>
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                         Sign in to your account
                     </h1>
@@ -31,7 +32,7 @@
                             Sign in
                         </button>
                         <p class="text-sm font-light text-gray-500">
-                            Don’t have an account yet? <a href="#" class="font-medium text-gray-600 hover:underline">Sign up</a>
+                            Don’t have an account yet? <a href="{{route('profiles.create')}}" class="font-medium text-gray-600 hover:underline">Sign up</a>
                         </p>
                     </form>
                     

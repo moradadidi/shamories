@@ -29,7 +29,7 @@
     <!-- Logo -->
     <tr>
       <td class="text-center pb-4">
-        <img src="{{ asset('storage/profile/image.png') }}" alt="adidi Logo" class="mx-auto w-32 h-auto">
+        <img src="{{ asset('storage/profile/okkke.jpeg') }}" alt="adidi Logo" class="mx-auto w-32 h-auto">
       </td>
     </tr>
 

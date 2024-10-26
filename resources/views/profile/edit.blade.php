@@ -67,6 +67,32 @@
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
+                    <!-- Location -->
+        <div class="sm:col-span-2">
+            <label for="location" class="block mb-2 text-sm font-medium text-gray-900">Location</label>
+            <input type="text" name="location" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Enter your location" value="{{ old('location', $profile->location) }}">
+            @error('location')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- Occupation -->
+        <div class="sm:col-span-2">
+            <label for="occupation" class="block mb-2 text-sm font-medium text-gray-900">Occupation</label>
+            <input type="text" name="occupation" id="occupation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Enter your occupation" value="{{ old('occupation', $profile->occupation) }}">
+            @error('occupation')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- University -->
+        <div class="sm:col-span-2">
+            <label for="university" class="block mb-2 text-sm font-medium text-gray-900">University</label>
+            <input type="text" name="university" id="university" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Enter your university" value="{{ old('university', $profile->university) }}">
+            @error('university')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
                 </div>
 
                 <button type="submit" class="inline-flex items-center flex-end px-5 py-2.5 mt-4 sm:mt-6 text-sm border-black font-medium text-center text-black bg-gray-200 rounded-lg focus:ring-4 focus:ring-gray-200 hover:bg-gray-800 hover:text-white">

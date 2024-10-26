@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
 
 class Profile extends Authenticatable
 {
     use HasFactory;
     use SoftDeletes;
+    use Notifiable;
 
-    protected $fillable = ['name', 'email', 'bio', 'password', 'image', 'email_verified_at'];
+    protected $fillable = ['name', 'email', 'bio', 'password', 'image', 'email_verified_at','location','occupation','university'];
 
     public function getImageAttribute($value)
     {
@@ -63,4 +66,23 @@ class Profile extends Authenticatable
     {
         return $this->likes()->where('publication_id', $publication->id)->exists();
     }
+
+    public function saves()
+    {
+        return $this->hasMany(Save::class);
+    }
+
+    public function hasSaved(Publication $publication)
+    {
+        return $this->saves()->where('publication_id', $publication->id)->exists();
+    }
+
+    public function getProfileImageUrlAttribute()
+{
+    return $this->image 
+        ? asset('storage/' . $this->image)  // Assuming the image is stored in the 'storage' folder
+        : asset('images/default-profile.png');  // Default image if none exists
 }
+
+}
+

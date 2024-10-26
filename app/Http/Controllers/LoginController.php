@@ -23,7 +23,7 @@ class LoginController extends Controller
     
         if (Auth::attempt($values)) {
             $request->session()->regenerate();
-            return redirect('/')->with('success', 'Welcome to your profile');;
+            return  to_route('publications.index')->with('success', 'Welcome to your profile');
         } else {
             return back()->withErrors([
                 'email' => 'Email or password is invalid.',

@@ -8,6 +8,11 @@ use App\Http\Controllers\PublicationController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\FollowedNotification;
+use Illuminate\Support\Facades\Notification;
+
+
 Route::get('/verify_email/{hash}', [ProfilController::class, 'verify_email']);
 
 // Route::name('profiles.')->prefix('/profiles')->group(function () {
@@ -28,9 +33,12 @@ Route::post('/profiles/{profile}/follow', [ProfilController::class, 'follow'])->
 Route::resource('publications', PublicationController::class);
 // Like Route
 Route::post('/publications/{publication}/like', [PublicationController::class, 'like'])->name('publications.like');
-
 // Comment Route
 Route::post('/publications/{publication}/comment', [PublicationController::class, 'comment'])->name('publications.comment');
+// Toggle Save Routea
+Route::post('/publications/{publication}/toggleSave', [PublicationController::class, 'toggleSave'])->name('publications.toggleSave');
+
+Route::get('/my-saves', [PublicationController::class, 'allSaves'])->name('allSaves');
 
 
 Route::get('/settings', [informationController::class, "index"])->name('settings.index');
@@ -81,4 +89,24 @@ Route::get('/headers', function (Request $request) {
     // dd($request->is('profiles/{profile}'));
 
 });
+
+Route::get('/notifications', function () {
+    $notifications = Auth::user()->unreadNotifications; // Fetch all notifications
+    return view('notifications.all', compact('notifications'));
+})->name('notifications.all');
+Route::get('/notifications/read/{id}', function ($id) {
+    $user = Auth::user();
+    
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not authenticated');
+    }
+    
+    $notification = $user->notifications()->where('id', $id)->first();
+    
+    if ($notification) {
+        $notification->markAsRead();
+    }
+
+    return redirect()->back();
+})->name('notifications.read');
 
