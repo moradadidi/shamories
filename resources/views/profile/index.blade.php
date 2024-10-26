@@ -1,29 +1,29 @@
 <x-master title="Profile">
 
     <!-- Search Bar Section -->
-    <div class="bg-blue-50 py-8">
+    <div class="bg-blue-50 dark:bg-gray-800 py-8">
         <div class="container mx-auto">
             <form class="flex items-center justify-center max-w-lg mx-auto mb-4" action="{{ route('profiles.index') }}" method="GET">   
                 <div class="relative w-full">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-5 h-5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
                         </svg>
                     </div>
                     <input type="text" id="simple-search" 
-                           class="bg-white border border-gray-300 text-gray-900 text-sm rounded-full shadow-md focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 py-2.5" 
+                           class="bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200 text-sm rounded-full shadow-md focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 py-2.5" 
                            placeholder="Search profile name..." 
                            name="search" value="{{ request('search') }}" />
                 </div>
-                <button type="submit" class="ms-3 p-2.5 text-sm font-medium text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                <button type="submit" class="ml-3 p-2.5 text-sm font-medium text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700">
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
                 </button>
             </form>
 
-            <h1 class="text-5xl font-extrabold text-center text-blue-600">Welcome to the Profile Page</h1>
-            <p class="text-xl text-center text-gray-700 mt-4">Find and connect with other users.</p>
+            <h1 class="text-5xl font-extrabold text-center text-blue-600 dark:text-blue-400">Welcome to the Profile Page</h1>
+            <p class="text-xl text-center text-gray-700 dark:text-gray-300 mt-4">Find and connect with other users.</p>
         </div>
     </div>
 

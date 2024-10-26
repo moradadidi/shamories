@@ -1,17 +1,16 @@
-<nav class="bg-white border-gray-200 border-b-2 fixed top-0 w-full z-50">
+<nav class="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 border-b-2 fixed top-0 w-full z-50">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="{{ route('homepage') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="{{ asset('storage/profile/okkke.jpeg') }}" class="opacity-80 h-16" alt="Flowbite Logo" />
+        <a href="{{ route('publications.index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="{{ asset('storage/profile/okkke.jpeg') }}" class="opacity-80 h-16 dark:rounded-full" alt="Flowbite Logo" />
             {{-- <span class="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span> --}}
         </a>
 
         <!-- Mobile menu button -->
         <button data-collapse-toggle="navbar-default" type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 dark:text-gray-400 rounded-lg md:hidden hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-600"
             aria-controls="navbar-default" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 17 14">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M1 1h15M1 7h15M1 13h15" />
             </svg>
@@ -20,19 +19,17 @@
         <!-- Desktop menu -->
         <div class="hidden w-full md:block md:w-auto " id="navbar-default">
             <ul
-                class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
+                class="font-medium flex flex-col p-4 md:p-0 gap-10 mt-4 border border-gray-100 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:md:bg-gray-900">
                
-
                 <li>
                     <a href="{{ route('publications.index') }}"
-                        class="block mt-1.5 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-700 md:p-0">Publications</a>
+                        class="block mt-1.5 px-3 text-gray-900 dark:text-gray-200 rounded hover:bg-gray-100 dark:md:hover:bg-transparent md:border-0 md:hover:text-orange-700 md:p-0">Publications</a>
                 </li>
 
                 <li>
                     <a href="{{ route('profiles.index') }}"
-                        class="block mt-1.5 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-700 md:p-0">Profiles</a>
+                        class="block mt-1.5 px-3 text-gray-900 dark:text-gray-200 rounded hover:bg-gray-100 dark:md:hover:bg-transparent md:border-0 md:hover:text-orange-700 md:p-0">Profiles</a>
                 </li>
-
 
                 {{-- <li>
           <a href="{{route('settings.index')}}" class="block mt-1.5 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Mes Informations</a>
@@ -42,16 +39,16 @@
 
                     <li>
                         <a href="{{ route('publications.create') }}"
-                            class="block mt-1.5 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Ajouter
+                            class="block mt-1.5 px-3 text-gray-900 dark:text-gray-200 rounded hover:bg-gray-100 dark:md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Add
                             Publication</a>
                     </li>
-                    <li>
+                    <li class="ml-20">
                         {{-- <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a> --}}
 
 
 
                         <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification"
-                            class="relative inline-flex mt-1 items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none"
+                            class="relative inline-flex mt-1 items-center text-sm font-medium text-center text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 focus:outline-none"
                             type="button">
                             <svg class="w-7 h-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 viewBox="0 0 14 20">
@@ -62,7 +59,7 @@
                             <!-- Notification badge for unread notifications -->
                             @if ($notifications->count() > 0)
                                 <div
-                                    class="absolute block mt-0.5 w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0 start-4 dark:border-gray-900">
+                                    class="absolute block mt-0.5 w-3 h-3 bg-red-500 border-2 border-white dark:border-gray-900 rounded-full -top-0 start-4">
                                 </div>
                             @endif
                         </button>
@@ -70,7 +67,7 @@
 
                         <!-- Dropdown menu -->
                         <div id="dropdownNotification"
-                            class="z-20 hidden w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700"
+                            class="z-20 hidden w-full max-w-sm bg-white dark:bg-gray-800 divide-y divide-gray-100 dark:divide-gray-700 rounded-lg shadow"
                             aria-labelledby="dropdownNotificationButton">
                             <div
                                 class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
@@ -89,7 +86,7 @@
                                           <img class="rounded-full w-11 h-11" src="{{ $notification->data['image_url'] ?? asset('storage/profile/default-profile.jpg') }}" alt="Profile image">
                                         </div>
                                         <div class="w-full ps-3">
-                                            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+                                            <div class="text-gray-500 dark:text-gray-400 text-sm mb-1.5">
                                                 {{ $notification->data['message'] }}
                                             </div>
                                             <div class="text-xs text-blue-600 dark:text-blue-500">
@@ -106,7 +103,7 @@
                             </div>
 
                             <a href="{{ route('notifications.all') }}"
-                                class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
+                                class="block py-2 text-sm font-medium text-center text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800 rounded-b-lg hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <div class="inline-flex items-center">
                                     <svg class="w-4 h-4 me-2 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
@@ -135,7 +132,7 @@
 
                         <!-- Dropdown menu -->
                         <div id="dropdownInformation"
-                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            class="z-10 hidden bg-white dark:bg-gray-700 divide-y divide-gray-100 dark:divide-gray-600 rounded-lg shadow w-44">
                             <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                 <div>{{ Auth::user()->name }}</div>
                                 <div class="font-medium truncate">{{ Auth::user()->email }}</div>
@@ -146,8 +143,7 @@
 
                                 <li>
                                     <a href="{{ route('profiles.show', Auth::id()) }}"
-                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mon
-                                        Profil</a>
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
 
                                 </li>
 
@@ -165,7 +161,7 @@
                             </ul>
                             <div class="py-2">
                                 <a href="{{ route('login.logout') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign
                                     out</a>
                             </div>
                         </div>
@@ -191,7 +187,7 @@
 
                         <!-- Dropdown menu -->
                         <div id="dropdownInformation"
-                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            class="z-10 hidden bg-white dark:bg-gray-700 divide-y divide-gray-100 dark:divide-gray-600 rounded-lg shadow w-44">
 
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownInformationButton">
@@ -200,13 +196,12 @@
                                 @guest
                                     <div class="py-2">
                                         <a href="{{ route('profiles.create') }}"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Create
+                                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Create
                                             Account</a>
                                     </div>
                                     <div class="py-2">
                                         <a href="{{ route('login.show') }}"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Se
-                                            connecter</a>
+                                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">login</a>
                                     </div>
                                 @endguest
 
