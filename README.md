@@ -41,12 +41,14 @@ To set up SHAMORIES locally, follow these Laravel standard commands:
    cd shamories
 
 2. Install dependencies:
-composer install
-npm install
+    ```bash
+    composer install
+    npm install
 
 3. Set up the environment:
-cp .env.example .env
-php artisan key:generate
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
 
 Update .env with your MySQL database credentials:
 DB_CONNECTION=mysql
@@ -61,6 +63,8 @@ php artisan migrate
 
 5. Start the development server:
 php artisan serve
+
+
 Usage
 Register a new account or log in with existing credentials.
 Post updates, follow other users, and engage with content on your feed.
