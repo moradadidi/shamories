@@ -51,21 +51,26 @@ To set up SHAMORIES locally, follow these Laravel standard commands:
     php artisan key:generate
 
 Update .env with your MySQL database credentials:
+```bash
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=your_database_name
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
-
+```
 4. Run migrations:
+```bash
 php artisan migrate
+```
 
 5. Start the development server:
+```bash
 php artisan serve
-
+```
 
 Usage
+
 Register a new account or log in with existing credentials.
 Post updates, follow other users, and engage with content on your feed.
 Contributing
