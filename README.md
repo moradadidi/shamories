@@ -14,7 +14,7 @@
 SHAMORIES is a Laravel-based social media platform where users can post updates, follow other users, and interact in a similar fashion to traditional social media applications. It currently excludes a chat feature, focusing instead on streamlined posting and following functionality.
 
 <p align="center">
-  <img src="storage/app/public/profile/interface.png" alt="SHAMORIES Interface" width="600">
+  <img src="assets/interface.png" alt="SHAMORIES Interface" width="600">
 </p>
 
 ## Tech Stack
