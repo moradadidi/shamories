@@ -37,7 +37,7 @@ To set up SHAMORIES locally, follow these Laravel standard commands:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/shamories.git
+   git clone https://github.com/moradadidi/shamories.git
    cd shamories
 
 2. Install dependencies:
