@@ -29,7 +29,7 @@
         
         @include('partials.nav')
 
-        <main class="mt-24 z-50">
+        <main class=" z-50">
             {{-- Alert notifications using Tailwind and Toastr --}}
             {{ $slot }}
         </main>
