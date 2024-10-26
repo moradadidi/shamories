@@ -30,7 +30,7 @@ class PublicationController extends Controller
         $publications = Publication::latest()->get();
         $user  = Auth::guard('web')->user();
 
-        $user->follow = $profile->followers()->count();
+        // $user->follow = $profile->followers()->count();
 
        
         return view('publication.index', compact('publications', 'profiles'));

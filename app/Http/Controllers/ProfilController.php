@@ -139,6 +139,7 @@ class ProfilController extends Controller
         if ($currentProfile->isFollowing($profile)) {
             // If already following, unfollow the profile
             $currentProfile->following()->detach($profile->id);
+            return redirect()->back()->with('info', 'You are no longer following this profile!');
         } else {
             // Otherwise, follow the profile
             $currentProfile->following()->attach($profile->id);

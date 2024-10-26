@@ -72,7 +72,7 @@
 
         <!-- Post Title and Content -->
         <h3 class="text-2xl font-bold text-gray-800 mb-2">{{ $publication->title }}</h3>
-        <p class="text-gray-600 text-base">{{ \Illuminate\Support\Str::limit($publication->body, 150) }}</p>
+        <p class="text-gray-600 text-base">{{ \Illuminate\Support\Str::limit($publication->body, 3250) }}</p>
 
         <!-- Image Section with Placeholder Spinner -->
         @if ($publication->image)
